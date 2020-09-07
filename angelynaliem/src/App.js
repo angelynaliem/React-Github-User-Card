@@ -1,7 +1,18 @@
 import React from 'react';
 import Angelyn from './components/Angelyn';
 import Followers from './components/Followers';
+import Followers2 from './components/Followers2';
+import Followers3 from './components/Followers3';
 import './App.css';
+
+// const followersArray = [
+//   "https://api.github.com/users/ericcapiz",
+//   "https://api.github.com/users/kwmorlock",
+//   "https://api.github.com/users/KVlearn",
+//   "https://api.github.com/users/robledokari",
+//   "https://api.github.com/users/MarcGallegos",
+//   "https://api.github.com/users/ch46gc",
+// ]
 
 class App extends React.Component {
   constructor() {
@@ -9,6 +20,8 @@ class App extends React.Component {
     this.state = {
       githubData : [],
       githubFollowersData : [],
+      githubFollowersData2 : [],
+      githubFollowersData3 : [],
 
   }
 
@@ -27,14 +40,34 @@ class App extends React.Component {
     })
     .catch((err) => console.error("failure to fetch data ", err.message));
 
+    // followersArray.forEach(follower => { 
     fetch("https://api.github.com/users/ericcapiz")
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
-      this.setState({ githubFollowersData: json});
+      this.setState({ githubFollowersData: json });
     })
     .catch((err) => console.error("failure to fetch data ", err.message));
-  }
+  
+
+  fetch("https://api.github.com/users/kwmorlock")
+  .then((res) => res.json())
+  .then((json) => {
+    console.log(json);
+    this.setState({ githubFollowersData2: json });
+  })
+  .catch((err) => console.error("failure to fetch data ", err.message));
+
+
+fetch("https://api.github.com/users/KVlearn")
+.then((res) => res.json())
+.then((json) => {
+  console.log(json);
+  this.setState({ githubFollowersData3: json });
+})
+.catch((err) => console.error("failure to fetch data ", err.message));
+}
+
 
   render() {
     return (
@@ -44,6 +77,8 @@ class App extends React.Component {
         <div>
         <h2>My Followers</h2>
         <Followers followers={this.state.githubFollowersData} />
+        <Followers2 followers2={this.state.githubFollowersData2} />
+        <Followers3 followers3={this.state.githubFollowersData3} />
         </div>
       </div>
     )
